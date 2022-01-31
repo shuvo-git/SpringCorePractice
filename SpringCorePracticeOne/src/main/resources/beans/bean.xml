@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-init-method="init"
+       default-destroy-method="destroy"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c">
+
+    <bean id="patient"
+          class="com.jobayed.springcorepracticeone.patient.Patient"
+          scope="singleton"
+          init-method="onCreate"
+          destroy-method="onDestroy"
+          factory-method="getInstance">
+        <constructor-arg name="id" value="6"></constructor-arg>
+        <constructor-arg name="name" value="Tommyyyyy"></constructor-arg>
+        <property name="nationalId" value="122222"></property>
+        <property name="patientAddress" ref="address"></property>
+    </bean>
+
+    <bean id="patient2"
+          class="com.jobayed.springcorepracticeone.patient.Patient"
+          scope="singleton"
+          init-method="onCreate"
+          destroy-method="onDestroy"
+          factory-bean="patientFactory"
+          factory-method="createPatient"
+          p:patientAddress-ref="address2"
+          c:id="7"
+          c:name="Jetty">
+
+        <property name="nationalId" value="44444"></property>
+
+    </bean>
+
+    <bean id="patient3"
+          class="com.jobayed.springcorepracticeone.patient.Patient"
+          scope="singleton"
+          init-method="onCreate"
+          destroy-method="onDestroy"
+          c:_0="8"
+          c:_1="Joggler Tomb">
+        <property name="nationalId" value="122222"></property>
+        <property name="patientAddress" ref="address"></property>
+        <property name="emergencyContacts">
+            <list>
+                <ref bean="contact1"/>
+                <ref bean="contact2"/>
+                <ref bean="contact3"/>
+                <ref bean="contact4"/>
+                <bean class="com.jobayed.springcorepracticeone.patient.EmergencyContact"
+                      c:_0="Ashrafun" c:_1="01744556611"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="address"
+          class="com.jobayed.springcorepracticeone.patient.Address">
+        <constructor-arg name="street" value="Badda"></constructor-arg>
+        <constructor-arg name="postcode" value="1229"></constructor-arg>
+    </bean>
+
+    <bean id="address2" class="com.jobayed.springcorepracticeone.patient.Address" p:street="Gulshan 1"
+          p:postcode="1230"/>
+
+    <bean id="patientFactory" class="com.jobayed.springcorepracticeone.patient.PatientFactory"/>
+
+
+    <bean id="contact1"
+          class="com.jobayed.springcorepracticeone.patient.EmergencyContact"
+          c:_0="Riaz" c:_1="01744556677"/>
+    <bean id="contact2"
+          class="com.jobayed.springcorepracticeone.patient.EmergencyContact"
+          c:_0="Biplob" c:_1="01744556688"/>
+    <bean id="contact3"
+          class="com.jobayed.springcorepracticeone.patient.EmergencyContact"
+          c:_0="Mohsin" c:_1="01744556699"/>
+    <bean id="contact4"
+          class="com.jobayed.springcorepracticeone.patient.EmergencyContact"
+          c:_0="Akhlak" c:_1="01744556600"/>
+
+    <bean id="contactbook"
+          class="com.jobayed.springcorepracticeone.patient.ContactBook">
+        <property name="contacts" >
+            <map>
+                <entry key="first" value-ref="contact1"></entry>
+                <entry key="second" value-ref="contact2"></entry>
+                <entry key="third" value-ref="contact3"></entry>
+                <entry key="fourth" value-ref="contact4"></entry>
+            </map>
+        </property>
+        <property name="patient"><null></null></property>
+    </bean>
+
+</beans>
