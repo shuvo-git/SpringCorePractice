@@ -9,6 +9,7 @@
     </head>
     <body>
         <div class="container">
+        	<h1>...</h1>
             <h4 class="display-6">New Notice has been Successfully Created</h4>
             <a href="${pageContext.request.contextPath}/all"> &nbsp;View all notices</a>
         </div>
